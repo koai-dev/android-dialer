@@ -1,4 +1,4 @@
-package io.uuddlrlrba.dialpadview;
+package io.uuddlrlrba.dialer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
