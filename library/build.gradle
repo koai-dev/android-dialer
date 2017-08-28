@@ -1,4 +1,21 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+version = "1.0.0"       // Semver
+group = "io.uuddlrlrba" // Maven Group ID for the artifact
+def siteUrl = 'https://github.com/bmaslakov/android-dialpadview'
+def gitUrl = 'https://github.com/bmaslakov/android-dialpadview.git'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
 
 android {
     compileSdkVersion 26
@@ -31,4 +48,39 @@ dependencies {
     compile 'com.googlecode.libphonenumber:libphonenumber:8.8.0'
     compile 'com.googlecode.libphonenumber:geocoder:2.77'
     testCompile 'junit:junit:4.12'
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+bintray {
+    user = rootProject.ext.bintrayUser
+    key = rootProject.ext.bintrayPassword
+    configurations = ['archives']
+    override = true
+    pkg {
+        repo = 'maven'
+        name = 'io.uuddlrlrba:android-dialpadview'
+        licenses = ['MIT']
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        publish = true
+    }
 }
