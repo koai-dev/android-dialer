@@ -78,7 +78,6 @@ public class DialpadView extends LinearLayout {
   private EditText mDigits;
   private ImageButton mDelete;
   private View mOverflowMenuButton;
-  private ColorStateList mRippleColor;
   private ViewGroup mRateContainer;
   private TextView mIldCountry;
   private TextView mIldRate;
@@ -96,16 +95,12 @@ public class DialpadView extends LinearLayout {
   public DialpadView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
 
-    TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Dialpad);
-    mRippleColor = a.getColorStateList(R.styleable.Dialpad_dialpad_key_button_touch_tint);
-    a.recycle();
-
     mTranslateDistance =
         getResources().getDimensionPixelSize(R.dimen.dialpad_key_button_translate_y);
 
     mIsLandscape =
         getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    mIsRtl =
+    mIsRtl = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 &&
         TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
   }
 
@@ -181,24 +176,21 @@ public class DialpadView extends LinearLayout {
         String letters = resources.getString(letterIds[i]);
         Spannable spannable =
             Spannable.Factory.getInstance().newSpannable(numberString + "," + letters);
-        spannable.setSpan(
-            (new TtsSpan.VerbatimBuilder(letters)).build(),
-            numberString.length() + 1,
-            numberString.length() + 1 + letters.length(),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+          spannable.setSpan(
+              (new TtsSpan.VerbatimBuilder(letters)).build(),
+              numberString.length() + 1,
+              numberString.length() + 1 + letters.length(),
+              Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
         numberContentDescription = spannable;
       }
 
-      final RippleDrawable rippleBackground =
-          (RippleDrawable) getDrawableCompat(getContext(), R.drawable.btn_dialpad_key);
-      if (mRippleColor != null) {
-        rippleBackground.setColor(mRippleColor);
-      }
-
       numberView.setText(numberString);
-      numberView.setElegantTextHeight(false);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        numberView.setElegantTextHeight(false);
+      }
       dialpadKey.setContentDescription(numberContentDescription);
-      dialpadKey.setBackground(rippleBackground);
 
       if (lettersView != null) {
         lettersView.setText(resources.getString(letterIds[i]));
@@ -234,16 +226,16 @@ public class DialpadView extends LinearLayout {
    *     configured to allow text manipulation.
    */
   public void setCanDigitsBeEdited(boolean canBeEdited) {
-    View deleteButton = findViewById(R.id.deleteButton);
-    deleteButton.setVisibility(canBeEdited ? View.VISIBLE : View.INVISIBLE);
-    View overflowMenuButton = findViewById(R.id.dialpad_overflow);
-    overflowMenuButton.setVisibility(canBeEdited ? View.VISIBLE : View.GONE);
+//    View deleteButton = findViewById(R.id.deleteButton);
+//    deleteButton.setVisibility(canBeEdited ? View.VISIBLE : View.INVISIBLE);
+//    View overflowMenuButton = findViewById(R.id.dialpad_overflow);
+//    overflowMenuButton.setVisibility(canBeEdited ? View.VISIBLE : View.GONE);
 
-    EditText digits = (EditText) findViewById(R.id.digits);
-    digits.setClickable(canBeEdited);
-    digits.setLongClickable(canBeEdited);
-    digits.setFocusableInTouchMode(canBeEdited);
-    digits.setCursorVisible(false);
+//    EditText digits = (EditText) findViewById(R.id.digits);
+//    digits.setClickable(canBeEdited);
+//    digits.setLongClickable(canBeEdited);
+//    digits.setFocusableInTouchMode(canBeEdited);
+//    digits.setCursorVisible(false);
 
     mCanDigitsBeEdited = canBeEdited;
   }

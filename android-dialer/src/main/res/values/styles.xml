@@ -23,21 +23,21 @@
   </style>
 
   <style name="DialpadKeyNumberStyle">
-    <item name="android:textColor">?attr/dialpad_text_color_primary</item>
-    <item name="android:textSize">?attr/dialpad_key_numbers_size</item>
+    <item name="android:textColor">?attr/colorPrimary</item>
+    <item name="android:textSize">@dimen/dialpad_key_numbers_default_size</item>
     <item name="android:fontFamily">sans-serif-light</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_marginBottom">?attr/dialpad_key_number_margin_bottom</item>
+    <item name="android:layout_marginBottom">@dimen/dialpad_key_number_default_margin_bottom</item>
     <item name="android:gravity">center</item>
   </style>
 
   <style name="DialpadBottomKeyNumberStyle" parent="DialpadKeyNumberStyle">
-    <item name="android:layout_marginBottom">?attr/dialpad_zero_key_number_margin_bottom</item>
+    <item name="android:layout_marginBottom">@dimen/dialpad_zero_key_number_default_margin_bottom</item>
   </style>
 
   <style name="DialpadKeyStarStyle">
-    <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
+    <item name="android:textColor">@color/dialpad_secondary_text_color</item>
     <item name="android:textSize">@dimen/dialpad_key_star_size</item>
     <item name="android:fontFamily">sans-serif-light</item>
     <item name="android:alpha">0.8</item>
@@ -48,7 +48,7 @@
   </style>
 
   <style name="DialpadKeyPoundStyle">
-    <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
+    <item name="android:textColor">@color/dialpad_secondary_text_color</item>
     <item name="android:textSize">@dimen/dialpad_key_pound_size</item>
     <item name="android:fontFamily">sans-serif-light</item>
     <item name="android:alpha">0.8</item>
@@ -59,7 +59,7 @@
   </style>
 
   <style name="DialpadKeyLettersStyle">
-    <item name="android:textColor">?attr/dialpad_text_color_secondary</item>
+    <item name="android:textColor">@color/dialpad_secondary_text_color</item>
     <item name="android:textSize">@dimen/dialpad_key_letters_size</item>
     <item name="android:fontFamily">sans-serif-regular</item>
     <item name="android:layout_width">wrap_content</item>
@@ -74,8 +74,8 @@
     <item name="android:layout_height">match_parent</item>
     <item name="android:layout_weight">13</item>
     <item name="android:minHeight">@dimen/dialpad_key_height</item>
-    <item name="android:background">@drawable/btn_dialpad_key</item>
     <item name="android:focusable">true</item>
+    <item name="android:background">@drawable/btn_dialpad_key</item>
   </style>
 
   <style name="DialpadKeyInternalLayoutStyle">
@@ -86,34 +86,4 @@
     <item name="android:orientation">vertical</item>
   </style>
 
-  <style name="Dialpad">
-    <item name="dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</item>
-    <item name="dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</item>
-    <item name="dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</item>
-    <item name="dialpad_key_number_margin_bottom">@dimen/dialpad_key_number_default_margin_bottom
-    </item>
-    <item name="dialpad_zero_key_number_margin_bottom">
-      @dimen/dialpad_zero_key_number_default_margin_bottom
-    </item>
-    <item name="dialpad_end_key_spacing">@dimen/dialpad_bottom_space_height</item>
-    <item name="dialpad_elevation">0dp</item>
-  </style>
-
-  <style name="Dialpad.Light">
-    <item name="dialpad_text_color">@color/dialpad_digits_text_color</item>
-    <item name="dialpad_text_color_primary">?attr/colorPrimary</item>
-    <item name="dialpad_text_color_secondary">@color/dialpad_secondary_text_color</item>
-    <item name="dialpad_icon_tint">@color/dialpad_icon_tint</item>
-    <item name="dialpad_voicemail_tint">@color/dialpad_voicemail_tint</item>
-    <item name="dialpad_background">@color/background_dialpad</item>
-  </style>
-
-  <style name="Dialpad.Dark">
-    <item name="dialpad_text_color">@android:color/white</item>
-    <item name="dialpad_text_color_primary">@android:color/white</item>
-    <item name="dialpad_text_color_secondary">#ffd4d6d7</item>
-    <item name="dialpad_icon_tint">@android:color/white</item>
-    <item name="dialpad_voicemail_tint">?attr/dialpad_text_color_secondary</item>
-    <item name="dialpad_background">#00000000</item>
-  </style>
 </resources>

@@ -19,9 +19,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:layout_gravity="bottom"
-  android:background="?attr/dialpad_background"
   android:clickable="true"
-  android:elevation="?attr/dialpad_elevation"
+  android:elevation="0dp"
   android:layoutDirection="ltr"
   android:orientation="vertical">
 
@@ -68,7 +67,7 @@
   <LinearLayout
     android:id="@+id/digits_container"
     android:layout_width="match_parent"
-    android:layout_height="?attr/dialpad_digits_adjustable_height"
+    android:layout_height="@dimen/dialpad_digits_height"
     android:orientation="horizontal">
 
     <ImageButton
@@ -82,7 +81,7 @@
       android:contentDescription="@string/description_dialpad_back"
       android:gravity="center"
       android:src="@drawable/quantum_ic_close_white_24"
-      android:tint="?attr/dialpad_icon_tint"
+      android:tint="@color/dialpad_icon_tint"
       android:tintMode="src_in"
       android:visibility="gone"/>
 
@@ -97,7 +96,7 @@
       android:contentDescription="@string/description_dialpad_overflow"
       android:gravity="center"
       android:src="@drawable/quantum_ic_more_vert_white_24"
-      android:tint="?attr/dialpad_icon_tint"
+      android:tint="@color/dialpad_icon_tint"
       android:tintMode="src_in"
       android:visibility="gone"/>
 
@@ -117,9 +116,9 @@
       android:maxLines="1"
       android:scrollHorizontally="true"
       android:singleLine="true"
-      android:textColor="?attr/dialpad_text_color"
+      android:textColor="@color/dialpad_digits_text_color"
       android:textCursorDrawable="@null"
-      android:textSize="?attr/dialpad_digits_adjustable_text_size"
+      android:textSize="@dimen/dialpad_digits_text_size"
       ex:resizing_text_min_size="@dimen/dialpad_digits_text_min_size"/>
 
     <ImageButton
@@ -132,7 +131,7 @@
       android:contentDescription="@string/description_delete_button"
       android:src="@drawable/quantum_ic_backspace_white_24"
       android:state_enabled="false"
-      android:tint="?attr/dialpad_icon_tint"
+      android:tint="@color/dialpad_icon_tint"
       android:tintMode="src_in"/>
   </LinearLayout>
 

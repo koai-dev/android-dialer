@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ import android.widget.TextView;
  * to a larger default, for the dialpad we use this class to more precisely render characters
  * according to the precise amount of space they need.
  */
-public class DialpadTextView extends TextView {
+public class DialpadTextView extends AppCompatTextView {
 
   private Rect mTextBounds = new Rect();
   private String mTextStr;

@@ -93,7 +93,4 @@
     <include layout="@layout/dialpad_key_pound"/>
     <Space style="@style/DialpadSpaceStyle"/>
   </LinearLayout>
-  <Space
-    android:layout_width="match_parent"
-    android:layout_height="?attr/dialpad_end_key_spacing"/>
 </LinearLayout>
