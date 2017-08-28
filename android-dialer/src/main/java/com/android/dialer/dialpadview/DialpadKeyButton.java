@@ -41,7 +41,7 @@ import android.widget.FrameLayout;
  *     to the long-click action
  * <li>Moving the hover pointer outside of the bounds of the button will restore to the normal click
  *     action
- *     <ul>
+ * </ul>
  */
 public class DialpadKeyButton extends FrameLayout {
 
