@@ -40,7 +40,7 @@ public class DialpadFragment extends Fragment {
         }
 
         View view = inflater.inflate(R.layout.dialpad_fragment, container, false);
-        dialpadView = view.findViewById(R.id.dialpad_view);
+        dialpadView = (DialpadView) view.findViewById(R.id.dialpad_view);
         dialpadView.setShowVoicemailButton(false);
 
         digits = dialpadView.getDigits();

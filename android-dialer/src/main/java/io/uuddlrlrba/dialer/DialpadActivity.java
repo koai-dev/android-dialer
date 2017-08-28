@@ -10,9 +10,9 @@ import android.support.v7.app.AppCompatActivity;
  * @author Boris Maslakov.
  */
 public class DialpadActivity extends AppCompatActivity implements DialpadFragment.Callback {
-    private final static String EXTRA_RESULT_FORMATTED = "EXTRA_RESULT_FORMATTED";
-    private final static String EXTRA_RESULT_RAW = "EXTRA_RESULT_RAW";
-    private final static String REGION_CODE = "REGION_CODE";
+    public final static String EXTRA_RESULT_FORMATTED = "EXTRA_RESULT_FORMATTED";
+    public final static String EXTRA_RESULT_RAW = "EXTRA_RESULT_RAW";
+    public final static String REGION_CODE = "REGION_CODE";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
