@@ -86,6 +86,7 @@ bintray {
     configurations = ['archives']
     override = false
     pkg {
+        userOrg = 'dialog'
         repo = 'maven'
         name = 'im.dlg:android-dialer'
         licenses = ['MIT']
