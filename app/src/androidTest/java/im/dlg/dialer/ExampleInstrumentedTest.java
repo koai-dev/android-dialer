@@ -1,4 +1,4 @@
-package io.uuddlrlrba.dialer;
+package im.dlg.dialer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("io.uuddlrlrba.dialpadview", appContext.getPackageName());
+        assertEquals("im.dlg.dialpadview", appContext.getPackageName());
     }
 }

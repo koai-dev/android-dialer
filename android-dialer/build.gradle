@@ -2,10 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.0.0"       // Semver
-group = "io.uuddlrlrba" // Maven Group ID for the artifact
-def siteUrl = 'https://github.com/bmaslakov/android-dialer'
-def gitUrl = 'https://github.com/bmaslakov/android-dialer.git'
+version = "1.0.0" // Semver
+group = "im.dlg"  // Maven Group ID for the artifact
+def siteUrl = 'https://github.com/dialogs/android-dialer'
+def gitUrl = 'https://github.com/dialogs/android-dialer.git'
 
 buildscript {
     repositories {
@@ -87,7 +87,7 @@ bintray {
     override = false
     pkg {
         repo = 'maven'
-        name = 'io.uuddlrlrba:android-dialer'
+        name = 'im.dlg:android-dialer'
         licenses = ['MIT']
         websiteUrl = siteUrl
         vcsUrl = gitUrl

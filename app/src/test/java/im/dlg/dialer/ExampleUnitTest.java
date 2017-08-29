@@ -1,4 +1,4 @@
-package io.uuddlrlrba.dialpadview;
+package im.dlg.dialer;
 
 import org.junit.Test;
 

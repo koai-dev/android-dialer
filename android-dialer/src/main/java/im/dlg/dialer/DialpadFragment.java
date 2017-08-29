@@ -1,4 +1,4 @@
-package io.uuddlrlrba.dialer;
+package im.dlg.dialer;
 
 import android.content.Context;
 import android.os.Bundle;
