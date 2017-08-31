@@ -15,15 +15,23 @@ import com.google.i18n.phonenumbers.AsYouTypeFormatter;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
 public class DialpadFragment extends Fragment {
-    final static String REGION_CODE = "REGION_CODE";
+    public final static String EXTRA_REGION_CODE = "REGION_CODE";
+    public final static String EXTRA_FORMAT_AS_YOU_TYPE = "EXTRA_FORMAT_AS_YOU_TYPE";
+    public final static String EXTRA_ENABLE_STAR = "EXTRA_ENABLE_STAR";
+    public final static String EXTRA_ENABLE_POUND = "EXTRA_ENABLE_POUND";
+    public final static String EXTRA_ENABLE_PLUS = "EXTRA_ENABLE_PLUS";
+
     private final static String DEFAULT_REGION_CODE = "US";
 
-    private DialpadView dialpadView;
     private EditText digits;
     private AsYouTypeFormatter formatter;
     private String input = "";
     private Callback callback;
     private String regionCode = DEFAULT_REGION_CODE;
+    private boolean formatAsYouType = true;
+    private boolean enableStar = true;
+    private boolean enablePound = true;
+    private boolean enablePlus = true;
 
     @Nullable
     @Override
@@ -36,11 +44,15 @@ public class DialpadFragment extends Fragment {
             arguments = getArguments();
         }
         if (arguments != null) {
-            regionCode = arguments.getString(REGION_CODE, DEFAULT_REGION_CODE);
+            regionCode = arguments.getString(EXTRA_REGION_CODE, DEFAULT_REGION_CODE);
+            formatAsYouType = arguments.getBoolean(EXTRA_FORMAT_AS_YOU_TYPE, true);
+            enableStar = arguments.getBoolean(EXTRA_ENABLE_STAR, true);
+            enablePound = arguments.getBoolean(EXTRA_ENABLE_POUND, true);
+            enablePlus = arguments.getBoolean(EXTRA_ENABLE_PLUS, true);
         }
 
         View view = inflater.inflate(R.layout.dialpad_fragment, container, false);
-        dialpadView = (DialpadView) view.findViewById(R.id.dialpad_view);
+        DialpadView dialpadView = (DialpadView) view.findViewById(R.id.dialpad_view);
         dialpadView.setShowVoicemailButton(false);
 
         digits = dialpadView.getDigits();
@@ -50,13 +62,15 @@ public class DialpadFragment extends Fragment {
                 append('0');
             }
         });
-        dialpadView.findViewById(R.id.zero).setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                append('+');
-                return true;
-            }
-        });
+        if (enablePlus) {
+            dialpadView.findViewById(R.id.zero).setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    append('+');
+                    return true;
+                }
+            });
+        }
         dialpadView.findViewById(R.id.one).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,18 +131,26 @@ public class DialpadFragment extends Fragment {
                 append('9');
             }
         });
-        dialpadView.findViewById(R.id.star).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                append('*');
-            }
-        });
-        dialpadView.findViewById(R.id.pound).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                append('#');
-            }
-        });
+        if (enableStar) {
+            dialpadView.findViewById(R.id.star).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    append('*');
+                }
+            });
+        } else {
+            dialpadView.findViewById(R.id.star).setVisibility(View.GONE);
+        }
+        if (enablePound) {
+            dialpadView.findViewById(R.id.pound).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    append('#');
+                }
+            });
+        } else {
+            dialpadView.findViewById(R.id.pound).setVisibility(View.GONE);
+        }
         dialpadView.getDeleteButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +165,9 @@ public class DialpadFragment extends Fragment {
             }
         });
 
-        formatter = PhoneNumberUtil.getInstance().getAsYouTypeFormatter(regionCode);
+        // if region code is null, no formatting is performed
+        formatter = PhoneNumberUtil.getInstance()
+                .getAsYouTypeFormatter(formatAsYouType ? regionCode : "");
 
         view.findViewById(R.id.fab_ok).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +184,11 @@ public class DialpadFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(REGION_CODE, regionCode);
+        outState.putString(EXTRA_REGION_CODE, regionCode);
+        outState.putBoolean(EXTRA_FORMAT_AS_YOU_TYPE, formatAsYouType);
+        outState.putBoolean(EXTRA_ENABLE_STAR, enableStar);
+        outState.putBoolean(EXTRA_ENABLE_POUND, enablePound);
+        outState.putBoolean(EXTRA_ENABLE_PLUS, enablePlus);
     }
 
     private void poll() {
