@@ -1,5 +1,8 @@
 # android-dialer
 
+[![Download](https://api.bintray.com/packages/dialog/maven/im.dlg%3Aandroid-dialer/images/download.svg)](https://bintray.com/dialog/maven/im.dlg%3Aandroid-dialer/_latestVersion)
+[![license](https://img.shields.io/github/license/dialogs/android-dialer.svg)](LICENSE)
+
 A reusable dialer implementation extracted from AOSP.
 
 ![Demo](demo.gif?raw=true)
