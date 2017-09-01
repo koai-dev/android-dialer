@@ -4,7 +4,7 @@ A reusable dialer implementation extracted from AOSP.
 
 ![Demo](demo.gif?raw=true)
 
-#### Including in your project
+## Including in your project
 
 ```
 repositories {
@@ -13,9 +13,9 @@ repositories {
 compile 'im.dlg:android-dialer:1.1.0'
 ```
 
-#### Usage
+## Usage
 
-##### 1) Within fragment
+### 1) Within fragment
 
 Just add the `DialpadFragment` into your activity and make sure the activity implements
 `DialpadActivity.Callback`:
@@ -30,7 +30,7 @@ The formatted string contains the input as it displayed to user (+1 555-546-0001
 string contains characters only (+15555460001).
 
 
-##### 2) Via `startActivityForResult`
+### 2) Via `startActivityForResult`
 
 ```
 Intent intent = new Intent(context, DialpadActivity.class);
@@ -50,7 +50,7 @@ override void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-##### Configuration
+### Configuration
 
 Whether you're using a fragment or an activity, you can provide configuration via extras.
 For a fragment use `setArguments`, and for activity use intent extras.
@@ -64,7 +64,7 @@ Arguments are:
 3) `EXTRA_ENABLE_POUND` (boolean): Will show the 'pound' symbol. Default is `true`.
 3) `EXTRA_ENABLE_PLUS` (boolean): Will show the 'plus' symbol. Default is `true`.
 
-#### License
+## License
 
 ```
 Copyright (c) 2017-present, dialog LLC <info@dlg.im>.
