@@ -68,6 +68,10 @@ Arguments are:
 3) `EXTRA_ENABLE_POUND` (boolean): Will show the 'pound' symbol. Default is `true`.
 3) `EXTRA_ENABLE_PLUS` (boolean): Will show the 'plus' symbol. Default is `true`.
 
+### Styles
+
+The dialer is styled using android theme colors; the button color is `colorAccent` and digits color is `colorPrimary`.
+
 ## License
 
 ```
