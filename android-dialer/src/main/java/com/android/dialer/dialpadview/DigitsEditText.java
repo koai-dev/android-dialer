@@ -54,4 +54,12 @@ public class DigitsEditText extends ResizingTextEditText {
     }
     return ret;
   }
+
+  @Override
+  protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+    super.onTextChanged(text, start, lengthBefore, lengthAfter);
+    if (isCursorVisible()) {
+      setSelection(getText().length());
+    }
+  }
 }

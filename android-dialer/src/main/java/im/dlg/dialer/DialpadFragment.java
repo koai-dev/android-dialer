@@ -20,6 +20,7 @@ public class DialpadFragment extends Fragment {
     public final static String EXTRA_ENABLE_STAR = "EXTRA_ENABLE_STAR";
     public final static String EXTRA_ENABLE_POUND = "EXTRA_ENABLE_POUND";
     public final static String EXTRA_ENABLE_PLUS = "EXTRA_ENABLE_PLUS";
+    public final static String EXTRA_CURSOR_VISIBLE = "EXTRA_CURSOR_VISIBLE";
 
     private final static String DEFAULT_REGION_CODE = "US";
 
@@ -32,6 +33,7 @@ public class DialpadFragment extends Fragment {
     private boolean enableStar = true;
     private boolean enablePound = true;
     private boolean enablePlus = true;
+    private boolean cursorVisible = false;
 
     @Nullable
     @Override
@@ -45,10 +47,11 @@ public class DialpadFragment extends Fragment {
         }
         if (arguments != null) {
             regionCode = arguments.getString(EXTRA_REGION_CODE, DEFAULT_REGION_CODE);
-            formatAsYouType = arguments.getBoolean(EXTRA_FORMAT_AS_YOU_TYPE, true);
-            enableStar = arguments.getBoolean(EXTRA_ENABLE_STAR, true);
-            enablePound = arguments.getBoolean(EXTRA_ENABLE_POUND, true);
-            enablePlus = arguments.getBoolean(EXTRA_ENABLE_PLUS, true);
+            formatAsYouType = arguments.getBoolean(EXTRA_FORMAT_AS_YOU_TYPE, formatAsYouType);
+            enableStar = arguments.getBoolean(EXTRA_ENABLE_STAR, enableStar);
+            enablePound = arguments.getBoolean(EXTRA_ENABLE_POUND, enablePound);
+            enablePlus = arguments.getBoolean(EXTRA_ENABLE_PLUS, enablePlus);
+            cursorVisible = arguments.getBoolean(EXTRA_CURSOR_VISIBLE, cursorVisible);
         }
 
         View view = inflater.inflate(R.layout.dialpad_fragment, container, false);
@@ -56,6 +59,7 @@ public class DialpadFragment extends Fragment {
         dialpadView.setShowVoicemailButton(false);
 
         digits = dialpadView.getDigits();
+        digits.setCursorVisible(cursorVisible);
         dialpadView.findViewById(R.id.zero).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,6 +193,7 @@ public class DialpadFragment extends Fragment {
         outState.putBoolean(EXTRA_ENABLE_STAR, enableStar);
         outState.putBoolean(EXTRA_ENABLE_POUND, enablePound);
         outState.putBoolean(EXTRA_ENABLE_PLUS, enablePlus);
+        outState.putBoolean(EXTRA_CURSOR_VISIBLE, cursorVisible);
     }
 
     private void poll() {

@@ -65,8 +65,9 @@ Arguments are:
 2) `EXTRA_FORMAT_AS_YOU_TYPE` (boolean): Enable phone formatting. If disabled, both `formatted` and
 `raw` results will be the same. Default is `true`.
 3) `EXTRA_ENABLE_STAR` (boolean): Will show the 'star' symbol. Default is `true`.
-3) `EXTRA_ENABLE_POUND` (boolean): Will show the 'pound' symbol. Default is `true`.
-3) `EXTRA_ENABLE_PLUS` (boolean): Will show the 'plus' symbol. Default is `true`.
+4) `EXTRA_ENABLE_POUND` (boolean): Will show the 'pound' symbol. Default is `true`.
+5) `EXTRA_ENABLE_PLUS` (boolean): Will show the 'plus' symbol. Default is `true`.
+6) `EXTRA_CURSOR_VISIBLE` (boolean): Will show the cursor in the digits `EditText`. Default is `true`.
 
 ### Styles
 

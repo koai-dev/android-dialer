@@ -17,6 +17,7 @@ public class DialpadActivity extends AppCompatActivity implements DialpadFragmen
     public final static String EXTRA_ENABLE_STAR = "EXTRA_ENABLE_STAR";
     public final static String EXTRA_ENABLE_POUND = "EXTRA_ENABLE_POUND";
     public final static String EXTRA_ENABLE_PLUS = "EXTRA_ENABLE_PLUS";
+    public final static String EXTRA_CURSOR_VISIBLE = "EXTRA_CURSOR_VISIBLE";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,14 +27,26 @@ public class DialpadActivity extends AppCompatActivity implements DialpadFragmen
             Bundle args = new Bundle();
             args.putString(DialpadFragment.EXTRA_REGION_CODE,
                     getIntent().getStringExtra(EXTRA_REGION_CODE));
-            args.putBoolean(DialpadFragment.EXTRA_FORMAT_AS_YOU_TYPE,
-                    getIntent().getBooleanExtra(EXTRA_FORMAT_AS_YOU_TYPE, true));
-            args.putBoolean(DialpadFragment.EXTRA_ENABLE_STAR,
-                    getIntent().getBooleanExtra(EXTRA_ENABLE_STAR, true));
-            args.putBoolean(DialpadFragment.EXTRA_ENABLE_POUND,
-                    getIntent().getBooleanExtra(EXTRA_ENABLE_POUND, true));
-            args.putBoolean(DialpadFragment.EXTRA_ENABLE_PLUS,
-                    getIntent().getBooleanExtra(EXTRA_ENABLE_PLUS, true));
+            if (args.containsKey(EXTRA_FORMAT_AS_YOU_TYPE)) {
+                args.putBoolean(DialpadFragment.EXTRA_FORMAT_AS_YOU_TYPE,
+                        getIntent().getBooleanExtra(EXTRA_FORMAT_AS_YOU_TYPE, true));
+            }
+            if (args.containsKey(EXTRA_ENABLE_STAR)) {
+                args.putBoolean(DialpadFragment.EXTRA_ENABLE_STAR,
+                        getIntent().getBooleanExtra(EXTRA_ENABLE_STAR, true));
+            }
+            if (args.containsKey(EXTRA_ENABLE_PLUS)) {
+                args.putBoolean(DialpadFragment.EXTRA_ENABLE_POUND,
+                        getIntent().getBooleanExtra(EXTRA_ENABLE_POUND, true));
+            }
+            if (args.containsKey(EXTRA_ENABLE_PLUS)) {
+                args.putBoolean(DialpadFragment.EXTRA_ENABLE_PLUS,
+                        getIntent().getBooleanExtra(EXTRA_ENABLE_PLUS, true));
+            }
+            if (args.containsKey(EXTRA_CURSOR_VISIBLE)) {
+                args.putBoolean(DialpadFragment.EXTRA_CURSOR_VISIBLE,
+                        getIntent().getBooleanExtra(EXTRA_CURSOR_VISIBLE, false));
+            }
             fragment.setArguments(args);
 
             getSupportFragmentManager()
