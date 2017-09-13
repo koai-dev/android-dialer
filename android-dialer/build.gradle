@@ -89,7 +89,7 @@ bintray {
         userOrg = 'dialog'
         repo = 'maven'
         name = 'im.dlg:android-dialer'
-        licenses = ['MIT']
+        licenses = ['Apache-2.0']
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         publish = true
