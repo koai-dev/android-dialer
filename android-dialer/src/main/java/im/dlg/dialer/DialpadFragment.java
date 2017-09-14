@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.android.dialer.dialpadview.DialpadView;
+import com.android.dialer.dialpadview.DigitsEditText;
 import com.android.dialer.dialpadview.R;
 import com.google.i18n.phonenumbers.AsYouTypeFormatter;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -24,7 +24,7 @@ public class DialpadFragment extends Fragment {
 
     private final static String DEFAULT_REGION_CODE = "US";
 
-    private EditText digits;
+    private DigitsEditText digits;
     private AsYouTypeFormatter formatter;
     private String input = "";
     private Callback callback;
@@ -58,7 +58,7 @@ public class DialpadFragment extends Fragment {
         DialpadView dialpadView = (DialpadView) view.findViewById(R.id.dialpad_view);
         dialpadView.setShowVoicemailButton(false);
 
-        digits = dialpadView.getDigits();
+        digits = (DigitsEditText) dialpadView.getDigits();
         digits.setCursorVisible(cursorVisible);
         dialpadView.findViewById(R.id.zero).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,10 +177,22 @@ public class DialpadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (callback != null) {
-                    callback.ok(digits.getText().toString(), input);
+                    callback.ok(input, digits.getText().toString());
                 }
             }
         });
+
+        digits.setOnTextContextMenuClickListener(
+                new DigitsEditText.OnTextContextMenuClickListener() {
+                    @Override
+                    public void onTextContextMenuClickListener(int id) {
+                        String string = digits.getText().toString();
+                        clear();
+                        for (int i = 0; i < string.length(); i++) {
+                            append(string.charAt(i));
+                        }
+                    }
+                });
 
         return view;
     }

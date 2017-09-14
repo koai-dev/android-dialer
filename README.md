@@ -10,7 +10,7 @@ A reusable dialer implementation extracted from AOSP.
 
 ## Including in your project
 
-```
+```java
 repositories {
     jcenter()
 }
@@ -24,7 +24,7 @@ compile 'im.dlg:android-dialer:1.2.0'
 Just add the `DialpadFragment` into your activity and make sure the activity implements
 `DialpadActivity.Callback`:
 
-```
+```java
 interface Callback {
     void ok(String formatted, String raw);
 }
@@ -36,14 +36,14 @@ string contains characters only (+15555460001).
 
 ### 2) Via `startActivityForResult`
 
-```
+```java
 Intent intent = new Intent(context, DialpadActivity.class);
 startActivityForResult(intent, 100); // any result request code is ok
 ```
 
 And then in your `onActivityResult`:
 
-```
+```java
 @Override
 override void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (resultCode == Activity.RESULT_OK) {

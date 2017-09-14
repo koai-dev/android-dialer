@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = "1.2.0" // Semver
+version = "1.2.1" // Semver
 group = "im.dlg"  // Maven Group ID for the artifact
 def siteUrl = 'https://github.com/dialogs/android-dialer'
 def gitUrl = 'https://github.com/dialogs/android-dialer.git'

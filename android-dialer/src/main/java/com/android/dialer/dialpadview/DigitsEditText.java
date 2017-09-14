@@ -26,6 +26,7 @@ import com.android.dialer.widget.ResizingTextEditText;
 
 /** EditText which suppresses IME show up. */
 public class DigitsEditText extends ResizingTextEditText {
+  private OnTextContextMenuClickListener mOnTextContextMenuClickListener;
 
   public DigitsEditText(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -61,5 +62,22 @@ public class DigitsEditText extends ResizingTextEditText {
     if (isCursorVisible()) {
       setSelection(getText().length());
     }
+  }
+
+  @Override
+  public boolean onTextContextMenuItem(int id) {
+    boolean value = super.onTextContextMenuItem(id);
+    if (mOnTextContextMenuClickListener != null) {
+      mOnTextContextMenuClickListener.onTextContextMenuClickListener(id);
+    }
+    return value;
+  }
+
+  public interface OnTextContextMenuClickListener {
+    void onTextContextMenuClickListener(int id);
+  }
+
+  public void setOnTextContextMenuClickListener(OnTextContextMenuClickListener listener) {
+    this.mOnTextContextMenuClickListener = listener;
   }
 }
