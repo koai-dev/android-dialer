@@ -177,7 +177,7 @@ public class DialpadFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (callback != null) {
-                    callback.ok(input, digits.getText().toString());
+                    callback.ok(digits.getText().toString(), input);
                 }
             }
         });
@@ -212,9 +212,13 @@ public class DialpadFragment extends Fragment {
         if (!input.isEmpty()) {
             input = input.substring(0, input.length() - 1);
             formatter = PhoneNumberUtil.getInstance().getAsYouTypeFormatter(regionCode);
-            digits.setText("");
-            for (char c : input.toCharArray()) {
-                digits.setText(formatter.inputDigit(c));
+            if (formatAsYouType) {
+                digits.setText("");
+                for (char c : input.toCharArray()) {
+                    digits.setText(formatter.inputDigit(c));
+                }
+            } else {
+                digits.setText(input);
             }
         }
     }
@@ -226,8 +230,12 @@ public class DialpadFragment extends Fragment {
     }
 
     private void append(char c) {
-        digits.setText(formatter.inputDigit(c));
         input += c;
+        if (formatAsYouType) {
+            digits.setText(formatter.inputDigit(c));
+        } else {
+            digits.setText(input);
+        }
     }
 
     @Override
