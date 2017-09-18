@@ -14,7 +14,7 @@ A reusable dialer implementation extracted from AOSP.
 repositories {
     jcenter()
 }
-compile 'im.dlg:android-dialer:1.2.1'
+compile 'im.dlg:android-dialer:1.2.3'
 ```
 
 ## Usage
