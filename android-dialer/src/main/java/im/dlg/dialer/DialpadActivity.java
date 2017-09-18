@@ -27,25 +27,25 @@ public class DialpadActivity extends AppCompatActivity implements DialpadFragmen
             Bundle args = new Bundle();
             args.putString(DialpadFragment.EXTRA_REGION_CODE,
                     getIntent().getStringExtra(EXTRA_REGION_CODE));
-            if (args.containsKey(EXTRA_FORMAT_AS_YOU_TYPE)) {
+            if (getIntent().getExtras().containsKey(EXTRA_FORMAT_AS_YOU_TYPE)) {
                 args.putBoolean(DialpadFragment.EXTRA_FORMAT_AS_YOU_TYPE,
-                        getIntent().getBooleanExtra(EXTRA_FORMAT_AS_YOU_TYPE, true));
+                        getIntent().getExtras().getBoolean(EXTRA_FORMAT_AS_YOU_TYPE, true));
             }
-            if (args.containsKey(EXTRA_ENABLE_STAR)) {
+            if (getIntent().getExtras().containsKey(EXTRA_ENABLE_STAR)) {
                 args.putBoolean(DialpadFragment.EXTRA_ENABLE_STAR,
-                        getIntent().getBooleanExtra(EXTRA_ENABLE_STAR, true));
+                        getIntent().getExtras().getBoolean(EXTRA_ENABLE_STAR, true));
             }
-            if (args.containsKey(EXTRA_ENABLE_PLUS)) {
+            if (getIntent().getExtras().containsKey(EXTRA_ENABLE_PLUS)) {
                 args.putBoolean(DialpadFragment.EXTRA_ENABLE_POUND,
-                        getIntent().getBooleanExtra(EXTRA_ENABLE_POUND, true));
+                        getIntent().getExtras().getBoolean(EXTRA_ENABLE_POUND, true));
             }
-            if (args.containsKey(EXTRA_ENABLE_PLUS)) {
+            if (getIntent().getExtras().containsKey(EXTRA_ENABLE_PLUS)) {
                 args.putBoolean(DialpadFragment.EXTRA_ENABLE_PLUS,
-                        getIntent().getBooleanExtra(EXTRA_ENABLE_PLUS, true));
+                        getIntent().getExtras().getBoolean(EXTRA_ENABLE_PLUS, true));
             }
-            if (args.containsKey(EXTRA_CURSOR_VISIBLE)) {
+            if (getIntent().getExtras().containsKey(EXTRA_CURSOR_VISIBLE)) {
                 args.putBoolean(DialpadFragment.EXTRA_CURSOR_VISIBLE,
-                        getIntent().getBooleanExtra(EXTRA_CURSOR_VISIBLE, false));
+                        getIntent().getExtras().getBoolean(EXTRA_CURSOR_VISIBLE, false));
             }
             fragment.setArguments(args);
 
