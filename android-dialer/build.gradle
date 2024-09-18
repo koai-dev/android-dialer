@@ -1,29 +1,16 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-version = "1.2.3" // Semver
-group = "im.dlg"  // Maven Group ID for the artifact
-def siteUrl = 'https://github.com/dialogs/android-dialer'
-def gitUrl = 'https://github.com/dialogs/android-dialer.git'
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-    }
+plugins {
+    id 'com.android.library'
+    id("maven-publish")
 }
 
+group = 'com.koai-dev'
+version = '1.0.0'
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion 21
         versionCode 1
         versionName "1.0"
 
@@ -36,60 +23,70 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-configurations {
-    javadocDeps
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+    lint {
+        abortOnError true
+        baseline file('lint-baseline.xml')
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:support-annotations:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.googlecode.libphonenumber:libphonenumber:8.8.0'
-    testCompile 'junit:junit:4.12'
-    javadocDeps 'com.android.support:support-annotations:25.3.1'
-    javadocDeps 'com.android.support:appcompat-v7:25.3.1'
-    javadocDeps 'com.android.support:design:25.3.1'
-    javadocDeps 'com.googlecode.libphonenumber:libphonenumber:8.8.0'
+    implementation 'com.android.support:support-annotations:25.3.1'
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.8.0'
+    testImplementation 'junit:junit:4.12'
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+
+afterEvaluate{
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.koai-dev'
+                artifactId = 'android-dialer'
+                version = '1.0.0'
+
+                afterEvaluate {
+                    from components.release
+                }
+            }
+        }
+    }
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator)) + configurations.javadocDeps
-}
+task createReleaseTag {
+    doLast {
+        def tagName = "1.0.0"
+        try {
+            exec {
+                commandLine("git", "tag", "-a", tagName, "-m", "Release tag $tagName")
+            }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-bintray {
-    user = rootProject.ext.bintrayUser
-    key = rootProject.ext.bintrayPassword
-    configurations = ['archives']
-    override = false
-    pkg {
-        userOrg = 'dialog'
-        repo = 'maven'
-        name = 'im.dlg:android-dialer'
-        licenses = ['Apache-2.0']
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        publish = true
+            exec {
+                commandLine("git", "push", "origin", tagName)
+            }
+        } catch (e) {
+            println(e.toString())
+        }
     }
 }
